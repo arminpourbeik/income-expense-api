@@ -45,5 +45,9 @@ class RegistrationView(generics.GenericAPIView):
 
 
 class VerifyEmailView(generics.GenericAPIView):
+    """
+    View for confirm email with token
+    """
+
     def get(self, request):
         pass
