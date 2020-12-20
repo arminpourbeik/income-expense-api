@@ -39,6 +39,8 @@ class RegistrationView(generics.GenericAPIView):
             "email_subject": "Verify your email",
         }
 
+        Util.send_email(data=data)
+
         return Response(user_data, status=status.HTTP_201_CREATED)
 
 
