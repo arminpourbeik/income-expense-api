@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # Local apps
     "expenses",
     "authentication",
+    "incomes",
 ]
 
 MIDDLEWARE = [

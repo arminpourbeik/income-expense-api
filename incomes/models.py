@@ -3,20 +3,19 @@ from django.db import models
 from authentication.models import User
 
 
-class Expense(models.Model):
+class Income(models.Model):
     """
-    Database for expenses
+    Database table for incomes
     """
 
-    CATEGORY_OPTIONS = (
-        ("ONLINE_SERVICES", "ONLINE_SERVICES"),
-        ("TRAVEL", "TRAVEL"),
-        ("FOOD", "FOOD"),
-        ("RENT", "RENT"),
+    INCOME_OPTIONS = (
+        ("SALARY", "SALARY"),
+        ("BUSINESS", "BUSINESS"),
+        ("SIDE_HUSTLES", "SIDE_HUSTLES"),
         ("OTHERS", "OTHERS"),
     )
 
-    category = models.CharField(choices=CATEGORY_OPTIONS, max_length=255)
+    source = models.CharField(choices=INCOME_OPTIONS, max_length=255)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     owner = models.ForeignKey(
@@ -29,4 +28,4 @@ class Expense(models.Model):
         ordering = ("-date",)
 
     def __str__(self) -> str:
-        return f"{self.owner}'s expense"
+        return f"{self.owner}'s income"

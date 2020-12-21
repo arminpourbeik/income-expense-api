@@ -1,21 +1,21 @@
 from rest_framework import serializers
 
-from expenses.models import Expense
+from incomes.models import Income
 
 
-class ExpenseSerializer(serializers.ModelSerializer):
+class IncomeSerializer(serializers.ModelSerializer):
     """
-    Serializer for expense instance
+    Serializer for income instance
     """
 
     # owner = serializers.ReadOnlyField(source="owner.username")
 
     class Meta:
-        model = Expense
+        model = Income
         fields = (
             "id",
             "date",
             "description",
             "amount",
-            "category",
+            "source",
         )

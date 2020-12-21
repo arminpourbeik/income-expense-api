@@ -1,18 +1,18 @@
 from rest_framework import generics
 from rest_framework import permissions
 
-from expenses import serializers
-from expenses.permissions import IsOwner
-from expenses.models import Expense
+from incomes import serializers
+from incomes.permissions import IsOwner
+from incomes.models import Income
 
 
-class ExpenseListView(generics.ListCreateAPIView):
+class IncomeListView(generics.ListCreateAPIView):
     """
-    View for listing and creating expense
+    View for listing and creating income
     """
 
-    serializer_class = serializers.ExpenseSerializer
-    queryset = Expense.objects.all()
+    serializer_class = serializers.IncomeSerializer
+    queryset = Income.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
@@ -22,13 +22,13 @@ class ExpenseListView(generics.ListCreateAPIView):
         return self.queryset.filter(owner=self.request.user)
 
 
-class ExpenseDetailView(generics.RetrieveUpdateDestroyAPIView):
+class IncomeDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
-    View for an expense instance, updating, deleting
+    View for an income instance, updating, deleting
     """
 
-    serializer_class = serializers.ExpenseSerializer
-    queryset = Expense.objects.all()
+    serializer_class = serializers.IncomeSerializer
+    queryset = Income.objects.all()
     lookup_field = "id"
     permission_classes = (
         permissions.IsAuthenticated,
