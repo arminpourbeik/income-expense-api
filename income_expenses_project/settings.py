@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     # Local apps
     "authentication",
+    "expenses",
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,16 @@ EMAIL_PORT = 587
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+        }
+    }
+}
 
 
 # REST Framework settings
