@@ -1,6 +1,8 @@
 from decouple import config
 from pathlib import Path
 
+import rest_framework
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,8 +34,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg",
     # Local apps
-    "authentication",
     "expenses",
+    "authentication",
 ]
 
 MIDDLEWARE = [
@@ -136,7 +138,9 @@ SWAGGER_SETTINGS = {
 
 
 # REST Framework settings
-REST_FRMAEWORK = {
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 10,
     "NONE_FIELD_ERRORS_KEY": "error",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
