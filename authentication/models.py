@@ -12,7 +12,7 @@ class UserManager(BaseUserManager):
     """
 
     def create_user(self, username, email, password=None):
-        """Create a user"""
+        """Create and save a user"""
         if username is None:
             raise ValueError("User must have a username")
 
