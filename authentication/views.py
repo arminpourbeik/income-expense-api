@@ -1,12 +1,14 @@
 from django.contrib.sites.shortcuts import get_current_site
 
-from rest_framework import generics
+from rest_framework import generics, views
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from decouple import config
 import jwt
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 from authentication import serializers
 from authentication.models import User
@@ -46,11 +48,20 @@ class RegistrationView(generics.GenericAPIView):
         return Response(user_data, status=status.HTTP_201_CREATED)
 
 
-class VerifyEmailView(generics.GenericAPIView):
+class VerifyEmailView(views.APIView):
     """
     View for confirm email with token
     """
 
+    serializer_class = serializers.EmailVerificationSerializer
+    token_param_config = openapi.Parameter(
+        "token",
+        in_=openapi.IN_QUERY,
+        description="Description",
+        type=openapi.TYPE_STRING,
+    )
+
+    @swagger_auto_schema(manual_parameters=[token_param_config])
     def get(self, request):
         token = request.GET.get("token")
         try:
