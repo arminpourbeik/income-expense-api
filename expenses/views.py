@@ -4,6 +4,7 @@ from rest_framework import permissions
 from expenses import serializers
 from expenses.permissions import IsOwner
 from expenses.models import Expense
+from expenses.renderers import ExpenseRenderers
 
 
 class ExpenseListView(generics.ListCreateAPIView):
@@ -14,6 +15,7 @@ class ExpenseListView(generics.ListCreateAPIView):
     serializer_class = serializers.ExpenseSerializer
     queryset = Expense.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
+    renderer_classes = (ExpenseRenderers,)
 
     def perform_create(self, serializer):
         return serializer.save(owner=self.request.user)
