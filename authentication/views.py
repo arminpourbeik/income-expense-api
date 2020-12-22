@@ -1,3 +1,4 @@
+import jwt
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -13,7 +14,6 @@ from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from decouple import config
-import jwt
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
