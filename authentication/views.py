@@ -20,6 +20,7 @@ from drf_yasg import openapi
 from authentication import serializers
 from authentication.models import User
 from authentication.utils import Util
+from authentication.renderers import UserRenderer
 
 
 class RegistrationView(generics.GenericAPIView):
@@ -28,6 +29,7 @@ class RegistrationView(generics.GenericAPIView):
     """
 
     serializer_class = serializers.RegistrationSerializer
+    renderer_classes = (UserRenderer,)
 
     def post(self, request):
         user = request.data
