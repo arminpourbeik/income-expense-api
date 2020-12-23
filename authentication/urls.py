@@ -1,4 +1,7 @@
 from django.urls import path
+from rest_framework_simplejwt.views import (
+    TokenRefreshView,
+)
 
 from authentication import views
 
@@ -21,4 +24,5 @@ urlpatterns = [
         views.SetNewPasswordApiView.as_view(),
         name="password-reset-complete",
     ),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
