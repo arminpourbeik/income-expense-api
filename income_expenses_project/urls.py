@@ -29,6 +29,7 @@ urlpatterns = [
     ),
     path("expenses/", include("expenses.urls")),
     path("incomes/", include("incomes.urls")),
+    path("userstats/", include("userstats.urls")),
     # Swagger endpoints
     path(
         "",
