@@ -6,12 +6,8 @@ from rest_framework.exceptions import AuthenticationFailed
 from authentication import models
 
 
-from django.utils.encoding import (
-    smart_str,
-    force_str,
-    smart_bytes,
-    DjangoUnicodeDecodeError,
-)
+from django.utils.encoding import force_str
+
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -63,7 +59,16 @@ class LoginSerializer(serializers.ModelSerializer):
         max_length=68, write_only=True, style={"input_type": "password"}
     )
     username = serializers.CharField(max_length=68, min_length=6, read_only=True)
-    tokens = serializers.CharField(max_length=68, min_length=6, read_only=True)
+    # tokens = serializers.CharField(max_length=68, min_length=6, read_only=True)
+    tokens = serializers.SerializerMethodField()
+
+    def get_tokens(self, obj):
+        user = models.User.objects.get(email=obj["email"])
+
+        return {
+            "access": user.tokens["access"],
+            "refresh": user.tokens["refresh"],
+        }
 
     class Meta:
         model = models.User
