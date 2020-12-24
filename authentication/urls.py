@@ -9,6 +9,7 @@ urlpatterns = [
     path("register/", views.RegistrationView.as_view(), name="register"),
     path("verify-email/", views.VerifyEmailView.as_view(), name="email-verify"),
     path("login/", views.LoginApiView.as_view(), name="login"),
+    path("logout/", views.LogoutApiView.as_view(), name="logout"),
     path(
         "request-rest-email/",
         views.RequestPasswordResetEmail.as_view(),

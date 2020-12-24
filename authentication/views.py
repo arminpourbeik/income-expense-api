@@ -12,6 +12,7 @@ from rest_framework import generics, views
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
+from rest_framework import permissions
 from rest_framework_simplejwt.tokens import RefreshToken
 from decouple import config
 from drf_yasg.utils import swagger_auto_schema
@@ -199,3 +200,19 @@ class SetNewPasswordApiView(generics.GenericAPIView):
             {"success": True, "message": "Password reset success"},
             status=status.HTTP_200_OK,
         )
+
+
+class LogoutApiView(generics.GenericAPIView):
+    """
+    View for logout a user
+    """
+
+    serializer_class = serializers.LogoutSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

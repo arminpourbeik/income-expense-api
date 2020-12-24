@@ -16,7 +16,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "localhost:8000"]
 
 AUTH_USER_MODEL = "authentication.User"
 
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # 3rd party
     "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
     "drf_yasg",
     "corsheaders",
     # Local apps
@@ -156,4 +157,5 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "EXCEPTION_HANDLER": "utils.exception_handler.custom_exception_handler",
 }
