@@ -1,16 +1,12 @@
 from django.contrib import auth
+from django.utils.encoding import force_str
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.http import urlsafe_base64_decode
 
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 
 from authentication import models
-
-
-from django.utils.encoding import force_str
-
-
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
